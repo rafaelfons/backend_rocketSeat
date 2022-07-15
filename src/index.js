@@ -8,7 +8,7 @@ mongoose.connect('mongodb+srv://rafaelfon:R181006r@cluster0.yulx12c.mongodb.net/
 app.use(express.json()); // uso do insomnia
 app.use(routes)
 
-
+console.log("teste")
 app.listen(3232);
 //Metodos http: get, post, put, delete
 
