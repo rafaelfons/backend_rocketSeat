@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 
 const app = express();
-mongoose.connect('mongodb+srv://rafaelfon:R181006r@cluster0.yulx12c.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://rafaelfon:R181006r@rocketseat.u198iot.mongodb.net/?retryWrites=true&w=majority');
 
 app.use(express.json()); // uso do insomnia
 app.use(routes)
