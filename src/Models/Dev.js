@@ -13,5 +13,5 @@ const DevSchemma = new mongoose.Schema({
     }
 })
 
-
+console.log("teste Dev")
 module.exports = mongoose.model('Dev', DevSchemma)
