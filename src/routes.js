@@ -5,7 +5,7 @@ const routes = Router();
 console.log("teste routes")
 
 routes.get('/devs', DevController.index )
-routes.post('/creat', DevController.store  )
+routes.post('/create', DevController.store  )
 routes.get('/search', SearchController.index)
 routes.patch('/update', DevController.updateOne)
 routes.delete('/delete/:github_username', DevController.deleteOne)
