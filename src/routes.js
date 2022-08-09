@@ -7,7 +7,7 @@ console.log("teste routes")
 routes.get('/devs', DevController.index )
 routes.post('/create', DevController.store  )
 routes.get('/search', SearchController.index)
-routes.patch('/update', DevController.updateOne)
+routes.patch('/update', DevController.findOneAndUpdate)
 routes.delete('/delete/:github_username', DevController.deleteOne)
 
 

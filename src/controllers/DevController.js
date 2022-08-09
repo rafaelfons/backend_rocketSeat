@@ -2,7 +2,7 @@ const axios = require('axios')
 const Dev = require('../Models/Dev')
 const { index } = require('../models/utils/PointSchema')
 const parseStringAsArray = require ('../utils/parseStringAsArray')
-const { updateOne, deleteOne } = require("../Models/Dev")
+const { findOneAndUpdate , deleteOne } = require("../Models/Dev")
 
 module.exports = {
    async index (req, res) {
@@ -40,28 +40,33 @@ module.exports = {
        
         else return res.json({ message: "Dev exist", dev }) 
     },
-    async updateOne (req, res)  {  
+    async findOneAndUpdate (req, res)  {  
 
         const { github_username, techs, latitude, longitude } = req.body
         let devsup = await Dev.find({github_username})
-        if (devsup !== null){
-            const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`) 
-            const { name = login, avatar_url, bio } = apiResponse.data 
-            const techsArray =  parseStringAsArray(techs)
-            const location = {
+         if (devsup !== null){
+             const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`) 
+             console.log(apiResponse.data)
+             const { name = github_username, avatar_url, bio } = apiResponse.data 
+             const techsArray =  parseStringAsArray(techs)
+             const location = {
                 type: 'Point',
                 coordinates: [longitude, latitude],
-            }
+             },
         
-            devsup = await Dev.updateOne({
-                name,
-                avatar_url,
-                bio,
-                techs: techsArray,
-                location,
-            })
+                devsup = await Dev.findOneAndUpdate( {github_username},
+                {
+                    name,
+                    avatar_url,
+                    bio,
+                    techs: techsArray,
+                    location,
+                })
+              
             return res.json({ message: "Dev update", devsup }) 
         }
+
+        else return res.json({ message: "Dev not exist"})
         
     },
    async deleteOne(req, res){
