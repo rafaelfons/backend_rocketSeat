@@ -74,7 +74,7 @@ module.exports = {
 
     },
     async deleteOne(req, res) {
-        const { github_username } = req.params;
+        const { github_username } = req.body;
 
 
         console.log(github_username, "teste github_username")
