@@ -6,7 +6,7 @@ const parseStringAsArray = require('../utils/parseStringAsArray')
 module.exports = {
     async index(req, res) {
         const devs = await Dev.find()
-
+        
         return res.json(devs)
     },
 
@@ -74,7 +74,7 @@ module.exports = {
 
     },
     async deleteOne(req, res) {
-        const { github_username } = req.body;
+        const { github_username } = req.params;
 
 
         console.log(github_username, "teste github_username")
