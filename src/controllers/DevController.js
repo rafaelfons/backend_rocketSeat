@@ -45,7 +45,7 @@ module.exports = {
     },
 
     async findOneAndUpdate(req, res) {
-
+    try { 
         const { github_username, techs, latitude, longitude } = req.body
         let devsup = await Dev.find({ github_username })
         if (devsup !== null) {
@@ -58,19 +58,26 @@ module.exports = {
                 coordinates: [longitude, latitude],
             },
 
-                devsup = await Dev.findOneAndUpdate({ github_username },
-                    {
-                        name,
-                        avatar_url,
-                        bio,
-                        techs: techsArray,
-                        location,
-                    })
+            devsup = await Dev.findOneAndUpdate({ github_username },
+                {
+                    name,
+                    avatar_url,
+                    bio,
+                    techs: techsArray,
+                    location,
+                })
 
-            return res.json({ message: "Dev update", devsup })
-        }
+        return res.json({ message: "Dev update", devsup })
+    }
 
-        else return res.json({ message: "Dev not exist" })
+    else return res.json({ message: "Dev not exist" })
+        
+    } catch (error) {
+        console.log(error, "ERROR")
+        return res.status(400).json(error)
+        
+    }
+       
 
     },
     async deleteOne(req, res) {
